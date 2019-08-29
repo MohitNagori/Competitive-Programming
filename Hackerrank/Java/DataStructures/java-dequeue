@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class test {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Deque<Integer> deque = new ArrayDeque<Integer>();
+        int n = in.nextInt();
+        int m = in.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            deque.add(in.nextInt());
+        }
+
+        int max = 0, i = 0;
+        HashMap<Object, Integer> map = new HashMap<Object, Integer>();
+        Iterator iterator = deque.iterator(); 
+        while (iterator.hasNext() && ++i <= n) {
+            int num = (Integer) iterator.next();
+            map.put(num, map.get(num) == null ? 1 : map.get(num) + 1);
+            if (i >= m) {
+                if (max < map.size()) max = map.size();
+                num = deque.pollFirst(); 
+                if (map.get(num) > 1) {
+                    map.put(num, map.get(num) - 1);
+                } else {
+                    map.remove(num);
+                }
+            }
+        } 
+
+        System.out.println(max);
+    }
+}
