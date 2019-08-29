@@ -1,0 +1,36 @@
+import java.util.*;
+import java.text.*;
+
+public class Solution {
+
+    public static String currencyFormatter(double currency, String country) {
+        Locale locale= null;
+        switch(country) {
+            case "US": 
+                locale = new Locale("en", country);
+                break;
+            case "IN": 
+                locale = new Locale("en", country);
+                break;
+            case "CN": 
+                locale = new Locale("zh", country);
+                break;
+            case "FR": 
+                locale = new Locale("fr", country);
+                break;
+        }
+
+        return locale != null ? NumberFormat.getCurrencyInstance(locale).format(currency).toString() : "";
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double payment = scanner.nextDouble();
+        scanner.close();
+        
+        System.out.println("US: " + currencyFormatter(payment, "US"));
+        System.out.println("India: " + currencyFormatter(payment, "IN"));
+        System.out.println("China: " + currencyFormatter(payment, "CN"));
+        System.out.println("France: " + currencyFormatter(payment, "FR"));
+    }
+}
