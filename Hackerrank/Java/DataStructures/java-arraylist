@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+
+        ArrayList list[] = new ArrayList[n];
+        s.skip("\r\n|[\r\n\u2020\u2021\u0085]+");
+        for (int i = 0; i < n; i++) {
+            String[] line = s.nextLine().split(" ");
+
+            list[i] = new ArrayList<Integer>();
+            for (int j = 0; j < line.length; j++) {
+                list[i].add(Integer.parseInt(line[j]));
+            }    
+        }
+
+        int q = s.nextInt();
+
+        s.skip("\r\n|[\r\n\u2020\u2021\u0085]+");
+        while(q-- > 0) {
+            String[] line = s.nextLine().split(" ");
+            int x = Integer.parseInt(line[0]), y = Integer.parseInt(line[1]);
+            System.out.println(list[x-1].size() > y ? list[x-1].get(y) : "ERROR!");
+        }
+    }
+}
