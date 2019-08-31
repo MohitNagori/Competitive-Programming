@@ -1,0 +1,57 @@
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+    _input = _input.trim().split('\n').map(string => {
+        return string.trim();
+    });
+    
+    processData(_input);
+});
+
+function processData(input) {
+    main(input[1].split(" ").map(Number).sort((a, b) => {
+        return +(a) - +(b);
+    }));    
+}
+
+function main(nums) {
+    mean(nums);
+    median(nums);
+    mode(nums);
+}
+
+function mean(nums) { 
+    let n = nums.length;
+    console.log(nums.reduce((total, x) => { return total += x }, 0) / n);
+}
+
+function median(nums) {
+    let n = nums.length;
+    let median = nums[(n >> 1) - 1];
+    if (!(n & 1)) {
+        median += nums[n >> 1];
+        median /= 2;
+    }
+    console.log(median);
+}
+
+function mode(nums) {
+    const map = nums.reduce((acc, e) => acc.set(e, acc.get(e) + 1 || 1), new Map());
+    var greatestFreq = 0;
+    var mode;
+
+    map.forEach((value, key) => {
+        if (value > greatestFreq) {
+            greatestFreq = value;
+            mode = key;
+        } else if (value == greatestFreq && key < mode) {
+            mode = key;
+        }
+    });
+    console.log(mode);
+}
