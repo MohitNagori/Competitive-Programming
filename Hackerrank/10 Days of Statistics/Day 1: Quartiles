@@ -1,0 +1,38 @@
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+    _input = _input.trim().split('\n').map(string => {
+        return string.trim();
+    });
+
+    main(_input);
+});
+
+function main(input) {
+    quartiles(input[1].split(" ").map(Number).sort((a, b) => {
+        return +(a) - +(b);
+    }));
+}
+
+function quartiles(nums) {
+    let n = nums.length;
+    let mid = (n - 1) >> 1;
+    median(nums.slice(0, (n & 1) ? mid: mid + 1));
+    median(nums);    
+    median(nums.slice(mid + 1, n));
+}
+
+function median(nums) {
+    let n = nums.length;
+    let median = nums[(n-1) >> 1];
+    if (!(n & 1)) {
+        median += nums[n >> 1];
+        median /= 2;
+    }
+    console.log(median);
+}
