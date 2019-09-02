@@ -1,8 +1,6 @@
 var Regex_Pattern = /^\d+[A-Z]+[a-z]+$/; 
 
 function processData(Test_String) {
-    //Enter your code here
-    
     console.log(!!Test_String.match(Regex_Pattern));
 } 
 
