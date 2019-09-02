@@ -1,0 +1,18 @@
+Day 2: Basic Probability
+-> 5/6
+Total 36 choice.
+Choice that voilate condition -> {(4, 6), (6, 4), (5,5), (5, 6), (6, 5), (6,6)} -> (36 - 6)/36 -> 5/6
+
+
+
+Day 2: More Dice
+-> 1/9 
+Choice that fulfil condition -> {(1,5), (5,1), (2, 4), (4, 2)} -> 4/36 -> 1/9 
+
+
+
+Day 2: Compound Event Probability
+-> Probability of 2R1B -> RRB + RBR + BRR
+-> (4/7 * 5/9 * 4*8) + (4/7 * 4/9 * 4*8) + (3/7 * 5/9 * 4*8) 
+-> 80/504 + 64/504 + 60/504
+-> 204/504 -> 17/42
