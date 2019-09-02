@@ -1,0 +1,65 @@
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+    _input = _input.trim().split('\n').map(string => {
+        return string.trim();
+    });
+
+    main(_input);
+});
+
+function main(input) {
+    let num = input[1].split(" ");
+    let freq = input[2].split(" ");
+    let nums = [];
+
+    let total = 0;
+    for (i = 0; i < num.length; i++) {
+        nums.push({ n: parseInt(num[i]), f: parseInt(freq[i]) });
+        total += parseInt(freq[i]);
+    }
+    nums = nums.sort((a, b) => {
+        return a.n - b.n;
+    });
+    interquartile(nums, total);
+}
+
+function interquartile(nums, total) {
+    let lefta = -1, leftb = -1;
+    
+    let mid = (total + 1) >> 1;
+    let middle = total & 1 ? mid : mid + 1;
+
+    lefta = middle >> 1;
+    righta = mid + lefta;
+
+    let x = 0;
+    for (let i = 0; i < nums.length; i++) { 
+        if (nums[i].f >= lefta && lefta > 0) {
+            x -= nums[i].n;
+        } 
+        if (middle & 1 && nums[i].f >= lefta + 1  && lefta + 1 > 0) {
+            x -= nums[i].n;
+        } 
+        if (nums[i].f >= righta && righta > 0) {
+            x += nums[i].n;
+        } 
+        if (middle & 1 && nums[i].f >= righta + 1 && righta + 1 > 0) {
+            x += nums[i].n;
+        } 
+
+        lefta -= nums[i].f;
+        righta -= nums[i].f;
+
+    }
+
+    if (middle & 1)
+        x /= 2;
+
+    console.log(x.toFixed(1));
+}
