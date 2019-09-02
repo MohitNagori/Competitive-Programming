@@ -1,0 +1,26 @@
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+    _input = _input.trim().split('\n').map(string => {
+        return string.trim();
+    });
+
+    main(_input);
+});
+
+function main(input) {
+    let stdDev = standardDeviation(input[1].split(" ").map(Number));
+    console.log(stdDev);
+}
+
+function standardDeviation(nums) {
+    let n = nums.length;
+    let mean = nums.reduce((acc, a) => { return acc += a }, 0) / n;
+    let variance = nums.reduce((acc, a) => { return acc += Math.pow((mean - a), 2) }, 0) / n;
+    return Math.sqrt(variance).toFixed(1);
+}
