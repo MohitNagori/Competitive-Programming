@@ -1,8 +1,6 @@
 var Regex_Pattern = /^\d{1,2}[A-z]{3,}\.{0,3}$/; 
 
 function processData(Test_String) {
-    //Enter your code here
-    
     console.log(!!Test_String.match(Regex_Pattern));
 } 
 
