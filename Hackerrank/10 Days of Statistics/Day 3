@@ -1,0 +1,23 @@
+**Day 3: Conditional Probability -> 2 Boy Child out of 2 Child and mentioned 1 is Boy
+-> Total Possible Sample Space -> {BB, BG, GB, GG}
+-> Actual Sample Space -> {BB, BG, GB}
+P (BB) = 1/3
+
+
+
+**Day 3: Cards of the Same Suit -> 2 Cards of same suit
+-> We have 4 type of suit.
+-> P(First Card in a suit) = 1 (It definitely belongs t any of the suit)
+-> Now We have Sample Spcae = 51 cards
+-> Favourable Space = 12 Cards (1 has already been picked)
+-> P (Second Card of same suit) = 12/51
+
+
+
+**Day 3: Drawing Marbles -> 3 Red Marble, 4 Blue Marble, First is red then probability of 2 to be blue
+-> P(First Red Ball) = 3 / 7
+-> Sample Space -> P(RR) + P(RB) -> (3/7)(2/6) + (3/7)(4/6) -> 3/7
+-> Favourable Outcome -> P(RB) -> (3/7)(4/6) = 2/7
+-> P(R/B) -> (2/7)/(3/7) -> 2/3 
+          
+
