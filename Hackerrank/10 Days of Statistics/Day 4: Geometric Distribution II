@@ -1,0 +1,28 @@
+function processData(input) {
+    main(parseFloat(input[0].split(' ')[0]), parseFloat(input[0].split(' ')[1]),
+        parseFloat(input[1].split(' ')[0]));
+}
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+    processData(_input.split('\n'));
+});
+
+function main(favourable, total, n) {
+    let p = favourable / total;
+    let res = 0;
+    for (let i = 1; i <= n; i++) { 
+        res += solve(i, p);
+    }
+    console.log(res.toFixed(3));
+}
+
+function solve(n, p) {
+    return Math.pow(1 - p, n - 1) * p;
+}
