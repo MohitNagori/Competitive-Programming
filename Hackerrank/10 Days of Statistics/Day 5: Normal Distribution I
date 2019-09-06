@@ -1,0 +1,16 @@
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+double solve(double mean, double deviation, double a){
+    return 0.5 * (1 + erf((a - mean) / (deviation * pow(2, 0.5))));
+}
+
+int main() {
+    double mean, deviation, q1, q2, q3;
+    cin >> mean >> deviation >> q1 >> q2 >> q3;
+    cout.precision(3);
+    cout << solve(mean, deviation, q1) << endl 
+        <<  solve(mean, deviation, q3) - solve(mean, deviation, q2);
+    return 0;
+}
