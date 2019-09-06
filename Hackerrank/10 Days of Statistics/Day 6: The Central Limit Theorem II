@@ -1,0 +1,14 @@
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+double solve(double mean, double deviation, double a){
+    return 0.5 * (1 + erf((a - mean) / (deviation * pow(2, 0.5))));
+}
+
+int main() {
+    double tickets, n, mean, deviation;
+    cin >> tickets >> n >> mean >> deviation;
+    printf("%.4f", solve(n * mean, sqrt(n) * deviation, tickets));
+    return 0;
+}
