@@ -1,0 +1,31 @@
+function processData(input) {
+    main(parseFloat(input[0]), parseFloat(input[1]));
+}
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+    processData(_input.split('\n'));
+});
+
+function main(m, k) {
+    console.log(solve(m, k).toFixed(3));
+}
+
+function solve(m, k) {
+    return Math.pow(m, k) * Math.pow(2.718, -m) / factorial(k);
+}
+
+function factorial(k) {
+    let f = 1;
+    while (k) { 
+        f *= k;
+        k--;
+    }
+    return f;
+}
