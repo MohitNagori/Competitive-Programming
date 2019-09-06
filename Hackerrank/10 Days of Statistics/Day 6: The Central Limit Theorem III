@@ -1,0 +1,11 @@
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+int main() {
+    double n, mean, deviation, p, z;
+    cin >> n >> mean >> deviation >> p >> z;
+    deviation = deviation / sqrt(n);
+    printf("%.4f\n%.4f", (mean - z * deviation), (mean + z * deviation));
+    return 0;
+}
