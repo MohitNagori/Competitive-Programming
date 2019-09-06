@@ -1,0 +1,43 @@
+function processData(input) {
+    input = input.split(' ');
+    main(parseFloat(input[0]), parseFloat(input[1]));
+}
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+    processData(_input);
+});
+
+function main(a, b) {
+    let n = b; let x = 2; // Define in question
+    let p = a / 100;
+
+    // For at most 2
+    let res = 0;
+    for (let i = 0; i <= 2; i++) {
+        res += solve(i, n, p);
+    }
+    console.log(res.toFixed(3));
+
+    // For at least 2 will be (1 - p(atmost 2) + p(2))
+    res = 1 - res + solve(2, n, p);
+    console.log(res.toFixed(3));
+}
+
+function solve(x, n, p) {
+    return nCr(n, x) * Math.pow(p, x) * Math.pow(1 - p, n - x);
+}
+
+function nCr(n, x) {
+    let c = 1;
+    for (let i = 1; i <= x; i++) {
+        c *= (n - i + 1) / i;
+    }
+    return c;
+}
