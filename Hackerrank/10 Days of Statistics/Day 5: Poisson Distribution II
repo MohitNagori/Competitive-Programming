@@ -1,0 +1,28 @@
+function processData(input) {
+    input = input.split(' ');
+    main(parseFloat(input[0]), parseFloat(input[1]));
+}
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+    processData(_input);
+});
+
+function main(m, n) {
+    console.log(solveA(m).toFixed(3));
+    console.log(solveB(n).toFixed(3));
+}
+
+function solveA(m) {
+    return (m + Math.pow(m, 2)) * 40 + 160;
+}
+
+function solveB(n) {
+    return (n + Math.pow(n, 2)) * 40 + 128;
+}
