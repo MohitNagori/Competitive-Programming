@@ -1,0 +1,140 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int i, j;
+
+        String row[] = s.nextLine().trim().split(" ");
+        int m = Integer.parseInt(row[0]);
+        int n = Integer.parseInt(row[1]);
+        
+        double x[][] = new double[n][m+1], y[][] = new double[n][1];
+
+        for (i = 0; i < n; i++) {
+            row = s.nextLine().trim().split(" ");
+            for (j = 0; j <= m; j++) {
+                if (j == 0) x[i][j] = 1;
+                else x[i][j] = Double.parseDouble(row[j-1]);
+            }
+            y[i][0] = Double.parseDouble(row[m]);
+        }
+
+        int q = Integer.parseInt(s.nextLine().trim());
+        double queries[][] = new double[q][m];
+        for (i = 0; i < q; i++) {
+            row = s.nextLine().trim().split(" ");
+            for (j = 0; j < m; j++) {
+                queries[i][j] = Double.parseDouble(row[j]);
+            }
+        }
+
+        multipleLinearRegression(x, y, queries);
+    }
+
+    public static void multipleLinearRegression (double x[][], double y[][], double queries[][]) {
+        double tX[][] = matrixTranspose(x);
+        double b[][] = matrixMultiplication(tX, x);
+        b = matrixInverse(b);
+        b = matrixMultiplication(b, tX);
+        b = matrixMultiplication(b, y);
+
+
+        for (int i = 0; i < queries.length; i++) {
+            double query[][] = new double[1][x[0].length];
+            query[0][0] = 1;
+            for (int j = 1; j < x[0].length; j++) {
+                query[0][j] = queries[i][j-1];
+            }
+
+            System.out.println(matrixMultiplication(query, b)[0][0]);
+        }
+    }
+
+    public static double[][] matrixTranspose(double x[][]) {
+        int row = x.length, col = x[0].length;
+        double array[][] = new double[col][row];
+        for(int i = 0; i < col; i++) {
+            for(int j = 0; j < row; j++) {
+                array[i][j] = x[j][i];
+            };
+        };
+        return array;
+    }
+
+    public static double[][] matrixMultiplication(double x[][], double y[][]) { 
+        int row = x.length, col = y[0].length;
+        double array[][] = new double[row][col];
+        for(int i = 0; i < row; i++) {
+            for(int j = 0; j < col; j++) {
+                double res = 0;
+                for(int k = 0; k < x[0].length; k++) {
+                    res += x[i][k] * y[k][j];
+                };
+                array[i][j] = res;
+            };
+        };
+        return array;
+    }
+
+    public static double[][] augmentedMatrix(double x[][]) {
+        int row = x.length, col = x[0].length << 1, k = x[0].length, i, j;
+        double array[][] = new double[row][col];
+        for(i = 0; i < row; i++) {
+            for(j = 0; j < col; j++) {
+                if (j < k) {
+                    array[i][j] = x[i][j];
+                } else if (j - k == i) {
+                    array[i][j] = 1;    
+                } else {
+                    array[i][j] = 0;
+                }
+            };
+        };
+
+        for (i = row-1; i > 0; i--) { 
+            if (array[i - 1][0] < array[i][0]) { 
+                for (j = 0; j < col; j++) {
+                    array[i][j] = array[i][j] + array[i - 1][j] - (array[i - 1][j] = array[i][j]); 
+                }
+            } 
+        } 
+
+        return array;
+    }
+
+    public static double[][] matrixInverse(double x[][]) {   
+        int row = x.length, col = x[0].length, i, j, k;
+        double a[][] = augmentedMatrix(x);
+    
+        for (i = 0; i < row; i++) { 
+            for (j = 0; j < row; j++) { 
+                if (j != i) { 
+                    double temp = a[j][i] / a[i][i]; 
+                    for (k = 0; k < 2 * col; k++) { 
+                        a[j][k] -= a[i][k] * temp; 
+                    } 
+                } 
+            } 
+        } 
+    
+        for (i = 0; i < row; i++) {   
+            double temp = a[i][i]; 
+            for (j = 0; j < 2 * col; j++) { 
+                a[i][j] = a[i][j] / temp; 
+            } 
+        } 
+    
+        double array[][] = new double[row][col];
+        for(i = 0; i < row; i++) {
+            for(j = 0; j < col; j++) {
+                array[i][j] = a[i][j+col];
+            };
+        };
+        
+        return array; 
+    }    
+
+}
