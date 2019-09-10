@@ -1,0 +1,44 @@
+function processData(input) {
+    n = parseInt(input[0]);
+    x = input[1].trim().split(' ').map(Number);
+    y = input[2].trim().split(' ').map(Number);
+    main(x, y)
+} 
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+   processData(_input.split('\n'));
+});
+
+function main(x, y) {
+    console.log(pearsonCofficient(x, y).toFixed(3));
+}
+
+function pearsonCofficient(x, y) {
+    return covariance(x, y) / (x.length * stdDeviation(x, mean(x)) * stdDeviation(y, mean(y)));
+}
+
+function covariance(x, y) {
+    res = 0;
+    meanX = mean(x);
+    meanY = mean(y);
+    for (i = 0; i < x.length; i++) {
+        res += (meanX - x[i]) * (meanY - y[i]); 
+    }
+    return res;
+}
+
+
+function mean(x) {
+    return x.reduce((acc, i) => {return acc += i}, 0) / x.length;
+}
+
+function stdDeviation(x, mean) {
+    return Math.sqrt(x.reduce((acc, i) => {return acc += Math.pow(mean - i, 2)}, 0) / x.length);
+}
