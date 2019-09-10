@@ -1,0 +1,21 @@
+// Linear Regression 
+Y = a + bX
+then b = p * sigma(Y)/sigma(x)
+
+
+So, 
+-> y = -2 -3/4x 
+  -> Here b = p * sigma(Y)/sigma(x) = -3/4        // Equation 1
+
+-> x = -7/4 -3/4y 
+  -> Here b = p * sigma(X)/sigma(Y) = -3/4        // Equation 2
+    
+
+Now Equation 1 * Equation 2
+->  b^2 =  (p * sigma(Y)/sigma(x)) * (p * sigma(X)/sigma(Y))
+  -> 9/16 = p^2
+    -> p = 3/4 | -3/4
+    
+
+-> Slopes are negative -> negative correlation -> p = -3/4     
+    
